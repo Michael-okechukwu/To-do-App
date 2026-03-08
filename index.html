@@ -10,9 +10,14 @@
     <div class="container">
         <div class="todo-input">
              <h2>To-Do List</h2><br>
-             <div class="form">
-                <input id="todo-entry" type="text" placeholder="Write your To-do's here🔍" autocomplete="off">
-                <button id="add-button" onclick="addTask()">Add</button> 
+             <div>
+                <form class="form">
+                <input id="todo-entry" type="text" placeholder="Write your To-do's here" autocomplete="off"><br>
+                <textarea name="desc" id="description" placeholder="Task description"></textarea><br>
+                <input type="password" id="password" placeholder="Enter the Password"><br>
+                <input type="number" placeholder="Timer in Minutes" id="timer"><br>
+                <button id="add-button" onclick="addTask(event)">Add</button>
+             </form>
              </div>
         
             <ul id="list-container">
