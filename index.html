@@ -13,9 +13,13 @@
              <div>
                 <form class="form">
                 <input id="todo-entry" type="text" placeholder="Write your To-do's here" autocomplete="off"><br>
-                <textarea name="desc" id="description" placeholder="Task description"></textarea><br>
-                <input type="password" id="password" placeholder="Enter the Password"><br>
-                <input type="number" placeholder="Timer in Minutes" id="timer"><br>
+                <textarea name="desc" id="description" placeholder="Task description"></textarea> 
+                <p id="word-count"></p><br>
+                     <div class="password-wrapper">
+                        <input type="password" id="password" placeholder="Enter the Password">
+                        <span class="toggle-icon" onclick="togglePassword('password', this)">&#128065;</span>
+                    </div><br>
+                <input type="number" placeholder="Timer in Minutes" id="timer"><br>  
                 <button id="add-button" onclick="addTask(event)">Add</button>
              </form>
              </div>

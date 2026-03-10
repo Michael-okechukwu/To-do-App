@@ -3,6 +3,7 @@ const descInput = document.getElementById("description");
 const passwordInput = document.getElementById("password");
 const timerInput = document.getElementById("timer");
 const listContainer = document.getElementById("list-container");
+const wordCount = document.getElementById("word-count");
 
 function startTimer(timerSpan, minutesNumber, title) {
     let remainingSeconds = minutesNumber * 60;
@@ -89,6 +90,33 @@ listContainer.addEventListener("click", function(e){
         saveData();
     }
 }, false);
+
+function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.style.opacity = "1";
+            } else {
+                input.type = "password";
+                icon.style.opacity = "0.6";
+            }
+        }
+
+//count words 
+function countWords(description) {
+    if(description.trim().split("/\s+/").length > 250){
+        description.trim().split(" ").length -= 1;
+        alert("you have surpassed allowed length")
+        
+    }
+    return description.trim().split(" ").length;
+}
+function updateCountWords(){
+    wordCount.innerText = countWords(description.value) + "/250";
+}
+description.addEventListener("input", updateCountWords);
+updateCountWords();
+
 //local storage
 function saveData(){
     localStorage.setItem("data", listContainer.innerHTML);
