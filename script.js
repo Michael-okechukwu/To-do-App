@@ -46,10 +46,10 @@ function addTask(event) {
         return;
     }
 
-    if (password !== "1234") {
+   /* if (password !== "1234") {
         alert("Incorrect password.");
         return;
-    }
+    }*/
 
     const minutesNumber = Number(timerMinutes);
     if (isNaN(minutesNumber) || minutesNumber <= 0) {
@@ -59,6 +59,7 @@ function addTask(event) {
 
     const li = document.createElement("li");
     li.innerHTML = `<strong>${title}</strong> - ${desc}`;
+    li.dataset.password = password;
 
     const deleteSpan = document.createElement("span");
     deleteSpan.className = "delete-icon";
@@ -79,15 +80,39 @@ function addTask(event) {
     passwordInput.value = "";
     timerInput.value = "";
 }
-//cross and delete task
+//cross (requires task password) and delete task
 listContainer.addEventListener("click", function(e){
-    if(e.target.tagName === "LI"){
-        e.target.classList.toggle("checked");
+    const target = e.target;
+    const li = target.closest("li");
+    if (!li) return;
+
+    // delete icon: delete immediately
+    if (target.tagName === "SPAN" && target.classList.contains("delete-icon")) {
+        li.remove();
         saveData();
+        return;
     }
-    else if(e.target.tagName === "SPAN" && e.target.classList.contains("delete-icon")){
-        e.target.parentElement.remove();
+
+    // any other click on the task: require correct password to toggle complete
+    const taskPassword = li.dataset.password;
+
+    // if no password stored (old tasks), just toggle
+    if (!taskPassword) {
+        li.classList.toggle("checked");
         saveData();
+        return;
+    }
+
+    const entered = prompt("Enter the password for this task to mark it complete:");
+    if (entered === null) {
+        return; // user cancelled
+    }
+
+    if (entered === taskPassword) {
+        li.classList.toggle("checked");
+        saveData();
+    } else {
+        alert("Incorrect password for this task.");
     }
 }, false);
 
@@ -127,5 +152,6 @@ function showTask(){
     listContainer.innerHTML = localStorage.getItem("data");
 }
  showTask();
+ 
 
  
