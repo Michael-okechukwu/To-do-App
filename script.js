@@ -5,6 +5,7 @@ const timerInput = document.getElementById("timer");
 const listContainer = document.getElementById("list-container");
 const wordCount = document.getElementById("word-count");
 
+
 function startTimer(timerSpan, minutesNumber, title) {
     let remainingSeconds = minutesNumber * 60;
 
@@ -31,11 +32,9 @@ function startTimer(timerSpan, minutesNumber, title) {
 }
 
 //function to add tasks ...li is list
-function addTask(event) {
-    if (event) {
-        event.preventDefault();
-    }
-
+function addTask(e) {
+    if (e) e.preventDefault();
+    
     const title = inputBox.value.trim();
     const desc = descInput.value.trim();
     const password = passwordInput.value.trim();
@@ -152,6 +151,6 @@ function showTask(){
     listContainer.innerHTML = localStorage.getItem("data");
 }
  showTask();
- 
+
 
  
